@@ -9,11 +9,20 @@ export class UserService {
     private userRepository: Repository<User>,
   ) {}
 
-  createUser() {
-    return 'createUser';
+  async createUser(body: User) {
+    const user = await this.userRepository.create(body);
+    this.userRepository.save(user);
+    const { passwordHash, ...result } = user;
+    return result;
   }
 
   async findAll(): Promise<User[]> {
     return this.userRepository.find();
+  }
+
+  async findOne(email: string): Promise<User> {
+    return this.userRepository.findOne({
+      where: { email },
+    });
   }
 }
