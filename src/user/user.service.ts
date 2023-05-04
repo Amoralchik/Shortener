@@ -11,7 +11,7 @@ export class UserService {
 
   async createUser(body: User) {
     const user = await this.userRepository.create(body);
-    this.userRepository.save(user);
+    await this.userRepository.save(user);
     const { passwordHash, ...result } = user;
     return result;
   }
@@ -24,5 +24,9 @@ export class UserService {
     return this.userRepository.findOne({
       where: { email },
     });
+  }
+
+  async findFirst(): Promise<User> {
+    return this.userRepository.findOne({});
   }
 }
