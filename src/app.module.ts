@@ -11,9 +11,18 @@ import { AuthService } from './auth/auth.service';
 import { UrlModule } from './url/url.module';
 import { urlProviders } from './url/url.providers';
 import { UrlController } from './url/url.controller';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [UserModule, AuthModule, UrlModule],
+  imports: [
+    UserModule,
+    AuthModule,
+    UrlModule,
+    JwtModule.register({
+      secret: 'secret',
+      signOptions: { expiresIn: '60s' },
+    }),
+  ],
   controllers: [AppController, UserController, UrlController],
   providers: [
     AppService,

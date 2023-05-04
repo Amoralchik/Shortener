@@ -1,6 +1,16 @@
-import { Controller, Get, Query, Post, Req, Res } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Query,
+  Post,
+  Req,
+  Res,
+  UseGuards,
+} from '@nestjs/common';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { UrlService } from './url.service';
 
+@UseGuards(JwtAuthGuard)
 @Controller('url')
 export class UrlController {
   constructor(private readonly urlService: UrlService) {}
