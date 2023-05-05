@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { nanoid } from 'nanoid';
-import { entityRepository } from '../constant';
+import { entityRepository, hostUrl } from '../constant';
 import { User } from '../user/user.entity';
 import { Repository } from 'typeorm';
 import { Url } from './url.entity';
@@ -13,7 +13,7 @@ export class UrlService {
     private urlRepository: Repository<Url>,
   ) {}
 
-  async create(body: CreateUrlDto, userId) {
+  async create(body: CreateUrlDto, userId): Promise<string> {
     const urlToCreate = {
       ...body,
       shortName: nanoid(10),
@@ -21,7 +21,7 @@ export class UrlService {
     };
     const url = this.urlRepository.create(urlToCreate);
     await this.urlRepository.save(url);
-    return url;
+    return `${hostUrl}u?n=${url.shortName}`;
   }
 
   async findAll(user: User) {

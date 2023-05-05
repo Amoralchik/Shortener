@@ -8,3 +8,5 @@ export const entityRepository = {
 
 export const saltRounds = parseInt(process.env.SALT_ROUNDS) || 10;
 export const jwtSecret = process.env.JWT_SECRET;
+
+export const hostUrl = 'http://localhost:3000/';

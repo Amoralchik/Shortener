@@ -1,30 +1,31 @@
 ## Description
 
 ```bash
-Create account POST http://localhost:3000/user
-  form: {
-    username: 'string'
-    email: 'string@example.com'
-    password: 'password'
-  };
+#Create account
+POST http://localhost:3000/user
+  # form: {
+  #   username: 'string'
+  #   email: 'string@example.com'
+  #   password: 'password'
+  # };
 
-Login POST http://localhost:3000/auth/login
-  form: {
-    username: 'string@example.com'
-    password: 'password'
-  };
+# Login
+POST http://localhost:3000/auth/login
+  # form: {
+  #   username: 'string@example.com'
+  #   password: 'password'
+  # };
 
-Create shortlink POST http://localhost:3000/u
-  form: {
-    originalUrl: "https://github.com/Amoralchik/server"
-  };
-  response: {
-    "shortName": "PlotgLFpfk",
-    ...
-  }
+# Create shortlink
+POST http://localhost:3000/u
+  # form: {
+  #   originalUrl: "https://github.com/Amoralchik/server"
+  # };
+  # response: "http://localhost:3000/u?n=vIF4XPoLT7"
 
-GET http://localhost:3000/u?n=PlotgLFpfk
-  Redirect to "https://github.com/Amoralchik/server"
+# Using shortlink
+GET http://localhost:3000/u?n=vIF4XPoLT7
+  # Redirect to "https://github.com/Amoralchik/server"
 ```
 
 ## Installation
@@ -34,6 +35,11 @@ $ yarn install
 ```
 
 ## Running the app
+
+Rename .env.example to .env
+
+change JWT_SECRET
+optional change SALT_ROUNDS
 
 ```bash
 # docker with postgresql and server with watch mode
