@@ -12,15 +12,18 @@ import { UrlModule } from './url/url.module';
 import { urlProviders } from './url/url.providers';
 import { UrlController } from './url/url.controller';
 import { JwtModule } from '@nestjs/jwt';
+import { ConfigModule } from '@nestjs/config';
+import { jwtSecret } from './constant';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ isGlobal: true }),
     UserModule,
     AuthModule,
     UrlModule,
     JwtModule.register({
-      secret: 'secret',
-      signOptions: { expiresIn: '60s' },
+      secret: jwtSecret,
+      signOptions: { expiresIn: '24h' },
     }),
   ],
   controllers: [AppController, UserController, UrlController],

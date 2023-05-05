@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { nanoid } from 'nanoid';
+import { entityRepository } from 'src/constant';
 import { User } from 'src/user/user.entity';
 import { Repository } from 'typeorm';
 import { Url } from './url.entity';
@@ -7,7 +8,7 @@ import { Url } from './url.entity';
 @Injectable()
 export class UrlService {
   constructor(
-    @Inject('URL_REPOSITORY')
+    @Inject(entityRepository.url)
     private urlRepository: Repository<Url>,
   ) {}
 
@@ -18,8 +19,6 @@ export class UrlService {
       owner: req.user.id,
       user: req.user.id,
     };
-    console.log(urlToCreate);
-
     const url = await this.urlRepository.create(urlToCreate);
     await this.urlRepository.save(url);
     return url;

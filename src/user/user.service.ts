@@ -1,16 +1,24 @@
 import { Inject, Injectable } from '@nestjs/common';
+import { entityRepository, saltRounds } from 'src/constant';
 import { Repository } from 'typeorm';
+import * as bcrypt from 'bcrypt';
 import { User } from './user.entity';
 
 @Injectable()
 export class UserService {
   constructor(
-    @Inject('USER_REPOSITORY')
+    @Inject(entityRepository.user)
     private userRepository: Repository<User>,
   ) {}
 
   async createUser(body: User) {
-    const user = await this.userRepository.create(body);
+    const salt = bcrypt.genSaltSync(saltRounds);
+    const hash = bcrypt.hashSync(body.passwordHash, salt);
+
+    const user = await this.userRepository.create({
+      ...body,
+      passwordHash: hash,
+    });
     await this.userRepository.save(user);
     const { passwordHash, ...result } = user;
     return result;
