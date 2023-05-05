@@ -6,8 +6,10 @@ import {
   Req,
   Res,
   UseGuards,
+  Body,
 } from '@nestjs/common';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { CreateUrlDto } from './url.dto';
 import { UrlService } from './url.service';
 
 @UseGuards(JwtAuthGuard)
@@ -16,8 +18,8 @@ export class UrlController {
   constructor(private readonly urlService: UrlService) {}
 
   @Post()
-  create(@Req() req) {
-    return this.urlService.create(req);
+  create(@Req() req, @Body() createUrlDto: CreateUrlDto) {
+    return this.urlService.create(createUrlDto, req.user.id);
   }
 
   @Get('all')

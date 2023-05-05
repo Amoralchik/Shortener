@@ -4,6 +4,7 @@ import { entityRepository } from '../constant';
 import { User } from '../user/user.entity';
 import { Repository } from 'typeorm';
 import { Url } from './url.entity';
+import { CreateUrlDto } from './url.dto';
 
 @Injectable()
 export class UrlService {
@@ -12,11 +13,11 @@ export class UrlService {
     private urlRepository: Repository<Url>,
   ) {}
 
-  async create(req) {
+  async create(body: CreateUrlDto, userId) {
     const urlToCreate = {
-      ...req.body,
+      ...body,
       shortName: nanoid(10),
-      user: req.user.id,
+      user: userId,
     };
     const url = this.urlRepository.create(urlToCreate);
     await this.urlRepository.save(url);

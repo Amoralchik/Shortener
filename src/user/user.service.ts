@@ -3,6 +3,7 @@ import { entityRepository, saltRounds } from '../constant';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { User } from './user.entity';
+import { CreateUserDto } from './user.dto';
 
 @Injectable()
 export class UserService {
@@ -11,15 +12,16 @@ export class UserService {
     private userRepository: Repository<User>,
   ) {}
 
-  async createUser(body: User) {
-    const salt = bcrypt.genSaltSync(saltRounds);
-    const hash = bcrypt.hashSync(body.passwordHash, salt);
-
+  async createUser(body: CreateUserDto) {
+    const hash = await bcrypt.hash(body.password, saltRounds);
     const user = this.userRepository.create({
-      ...body,
+      email: body.email,
+      username: body.username,
       passwordHash: hash,
     });
+
     await this.userRepository.save(user);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { passwordHash, ...result } = user;
     return result;
   }

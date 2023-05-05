@@ -3,14 +3,14 @@
 ```bash
 Create account POST http://localhost:3000/user
   form: {
-    username: string
-    email: string
-    passwordHash: 'password'
+    username: 'string'
+    email: 'string@example.com'
+    password: 'password'
   };
 
 Login POST http://localhost:3000/auth/login
   form: {
-    username: Account Email
+    username: 'string@example.com'
     password: 'password'
   };
 
