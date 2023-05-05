@@ -15,8 +15,8 @@ export class UrlService {
     const urlToCreate = {
       ...req.body,
       shortName: nanoid(10),
-      owner: 1,
-      user: 1,
+      owner: req.user.id,
+      user: req.user.id,
     };
     console.log(urlToCreate);
 
@@ -27,7 +27,7 @@ export class UrlService {
 
   async findAll(user: User) {
     return this.urlRepository.find({
-      where: { user: { id: 1 } },
+      where: { user },
     });
   }
 
