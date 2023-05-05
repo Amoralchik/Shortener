@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { UrlService } from './url.service';
-import { DatabaseModule } from 'src/database/database.module';
+import { DatabaseModule } from '../database/database.module';
 import { urlProviders } from './url.providers';
 
 @Module({

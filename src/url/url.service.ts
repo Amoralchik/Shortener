@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { nanoid } from 'nanoid';
-import { entityRepository } from 'src/constant';
-import { User } from 'src/user/user.entity';
+import { entityRepository } from '../constant';
+import { User } from '../user/user.entity';
 import { Repository } from 'typeorm';
 import { Url } from './url.entity';
 

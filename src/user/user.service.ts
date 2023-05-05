@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { entityRepository, saltRounds } from 'src/constant';
+import { entityRepository, saltRounds } from '../constant';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { User } from './user.entity';

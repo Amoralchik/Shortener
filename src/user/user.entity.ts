@@ -1,4 +1,4 @@
-import { Url } from 'src/url/url.entity';
+import { Url } from '../url/url.entity';
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
 @Entity()
