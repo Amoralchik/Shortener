@@ -36,6 +36,11 @@ $ yarn install
 ## Running the app
 
 ```bash
+# docker with postgresql and server with watch mode
+yarn run docker:up
+```
+
+```bash
 # development
 $ yarn run start
 
