@@ -16,10 +16,9 @@ export class UrlService {
     const urlToCreate = {
       ...req.body,
       shortName: nanoid(10),
-      owner: req.user.id,
       user: req.user.id,
     };
-    const url = await this.urlRepository.create(urlToCreate);
+    const url = this.urlRepository.create(urlToCreate);
     await this.urlRepository.save(url);
     return url;
   }

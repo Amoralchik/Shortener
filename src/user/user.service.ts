@@ -15,7 +15,7 @@ export class UserService {
     const salt = bcrypt.genSaltSync(saltRounds);
     const hash = bcrypt.hashSync(body.passwordHash, salt);
 
-    const user = await this.userRepository.create({
+    const user = this.userRepository.create({
       ...body,
       passwordHash: hash,
     });

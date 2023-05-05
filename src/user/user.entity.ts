@@ -16,5 +16,5 @@ export class User {
   passwordHash: string;
 
   @OneToMany(() => Url, (url) => url.user)
-  photos: Url[];
+  url: Url[];
 }

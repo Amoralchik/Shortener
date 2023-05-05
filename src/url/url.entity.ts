@@ -12,9 +12,6 @@ export class Url {
   @Column()
   originalUrl: string;
 
-  @Column()
-  owner: string;
-
-  @ManyToOne(() => User, (user) => user.photos)
+  @ManyToOne(() => User, (user) => user.url)
   user: User;
 }
